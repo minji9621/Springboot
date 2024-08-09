@@ -1,0 +1,37 @@
+<h1>@{} - 링크 표현식 : URL을 생성하는데 사용</h1>
+
+<p>1 <a th:href="@{http://naver.com}" th:text="naver"></a></p>
+- 다른 사이트로 이동 시 사용
+
+<p>2 <a th:href="@{/th/main}" th:text="main"></a</p>
+- 기본적인 URL을 설정하는 방법, th:text="이름"
+- http://localhost:8888/th/main
+
+<p>3 <a th:href="@{|/th/${data}|}"></a</p>
+- URL에 변수표현식 사용시 반드시 앞뒤로 파이프바(|)로 감싸줘야 한다.
+- http://localhost:8888/th/main?id=java&pw=1234
+
+<p>4 <a th:href="@{/main?id=java&pw=1234}" th:text="main"></a</p>
+	- URL에 파라미터 설정 기본방식, id값으로 'java'를 보내고(Key와 Value 관계), 
+	  파라미터가 2개 이상일 때는 &로 연결해준다.
+	- 물음표 뒤는 전부 파라미터이다.
+	- http://localhost:8888/main?id=java&pw=1234
+	
+	
+<p>5 <a th:href="@{/th/{kkk}(kkk=${data})}" th:text="main"></a</p>
+	- /th/main
+	- URL의 {kkk} 부분에 (kkk=${data})으로 값이 대입된다.
+	
+	
+<p>6 <a th:href="@{/th/{kkk}(kkk=${data},id=${'java'})}" th:text="main"></a</p>
+	- kkk라는 이름을 짓고 data를 kkk에 넣겠다는 의미,id는 'java'
+	- http://localhost:8888/th/main?id=java
+	- id=${'java'} 부분은 파라미터로 적용
+	- URL의 {kkk} 부분에 (kkk=${data})으로 값이 대입된다.
+	
+<p>7 <a th:href="@{/{k1}/{k2}(k1=${'th'}, k2=${data}, id=${'java'})}" th:text="main"></a></p>
+- 실행 결과 : http://localhost:8888/th/main?id=java
+- URL의 {k1}{k2} 부분을 (k1=${'th'}, k2=${data})으로 대입하겠다.
+- id=${'java'} 부분은 파라미터로 적용
+
+

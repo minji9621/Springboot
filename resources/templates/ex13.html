@@ -1,0 +1,9 @@
+<input type="text" value="${age}" /> <br />
+<input type="text" th:value="${age}" />
+<br />
+<br />
+- input 태그에 사용되는 value 속성에 변수표현식을 사용할 경우 표현식 적용 안 됨 <br />
+- 타임리프는 기본 HTML 파일에 적용하였기 때문에 HTML의 기능이 우선적으로 적용됨
+- HTML은 표현언어를 처리하지 못한다. <br /><br />
+
+- 다양한 표현식은 반드시 타임리프의 속성에 사용해야 한다.(th:value라고 사용)

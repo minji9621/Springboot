@@ -1,0 +1,23 @@
+<h1>${#} : 기본 객체 표현식</h1>
+<div th:text="${#locale}"></div>
+- 적용된 언어를 확인
+<div th:text="${#messages.msg('version')}"></div>
+- messages.properties 파일 속성 활용
+<div th:text="${#dates.format(date)}"></div>
+- Date 클래스를 활용
+<div th:text="${#dates.format(date,'dd/MMM/yyyy HH:mm')}"></div>
+- Date 클래스를 활용하는데 형식을 지정해 줌
+<div th:text="${#calendars.day(date)}"></div>
+- Calendar 클래스를 활용, 그 중 .day 즉,한 달 중 며칠인지 확인
+<div th:text="${#numbers.formatInteger(num,3)}"></div>
+- 정수로 표현(보낸 속성 , 최소 3자리) 부족한 자리는 0으로 표현
+ex) 12 -> 012로 자릿수를 맞춰준다.
+<div th:text="${#numbers.formatPercent(num2,3,2)}"></div>
+- 퍼센트 적용, 정수 최소 3자리, 소숫점 2자리로 표현 - 반올림 적용
+<div th:text="${#strings.substring(message,0,5)}"></div>
+- String 클래스, 0부터 5미만
+ex)Hello -> 0,1,2,3,4로 0부터 4까지의 글자
+<div th:text="${#lists.size(list)}"></div>
+- util 패키지의 List,Set,Map도 존재함
+<div th:text="${#lists.sort(list)}"></div>
+- 기본정렬일 때 오름차순이므로 알파벳순으로 정렬된다.

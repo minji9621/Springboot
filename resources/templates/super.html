@@ -1,0 +1,20 @@
+<div th:insert="~{main.html}"></div>
+- div 태그 내부에 삽입
+- div
+	<h2>메인 페이지입니다.</h2>
+ /div
+ 
+<div th:replace="~{main.html}"></div>
+- div 태그가 사라지고 main.html이 대체한다.
+
+<div th:insert="~{ex07.html :: title}"></div>
+- 포함시킬 페이지에서 title 이름으로 호출
+
+<div th:insert="~{ex07.html :: content}"></div>
+- 포함시킬 페이지에서 content 이름으로 호출
+
+<div th:insert="~{ex07.html :: info('타임','010-1111-1111')}"></div>
+- ex07.html의 th:fragment="info" 설정된 메서드에 매개변수로 내용을 보내고 합친다.
+
+<div th:insert="~{ex07.html :: info('리프','010-2222-2222')}"></div>
+- ex07.html의 th:fragment="info" 설정된 메서드에 매개변수로 내용을 보내고 합친다.

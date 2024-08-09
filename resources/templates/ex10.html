@@ -1,0 +1,20 @@
+<h1>타임리프의 if / unless문</h1>
+
+<h3>같은 조건식 사용</h3>
+<span th:if="${age} > 10">크다</span>
+<span th:unless="${age} > 10">작다</span>
+
+<h3>if문만 사용</h3>
+<span th:if="${age} < 50">작다</span>
+
+<h3>unless만 사용</h3>
+<span th:unless="${age} > 50">작다</span>       <br/>
+<br/>
+- unless는 조건식의 결과가 false일 때 출력
+<br/>
+<br/>
+
+- if-unless의 관계가 if와 else의 관계와 같다.
+- 하나의 조건, if문은 조건이 true일 때 처리를 하고
+- unless문은 조건이 false일 때 처리를 한다.
+- 이 때, unless문은 if 없이 단독으로 사용 가능

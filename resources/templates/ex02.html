@@ -1,0 +1,7 @@
+<div th:text="${message}"></div>
+<div th:utext="${htmlContent}"></div>
+
+th:text
+- 전달받은 message 속성에 html 태그가 포함되어도 그대로 출력된다.
+th:utext
+- 전달받은 htmlContent 속성에 html 태그가 포함되면 태그를 적용시킨다.
