@@ -1,0 +1,21 @@
+오른쪽버튼 누르고 New - spring starter project - name : thymeleaf 입력 후 next
+ - Available에 web 입력 후 spring web 선택 - Finish 
+
+
+thymeleaf 프로젝트에 있는 build.gradle에 추가
+
+dependencies { // Lombok, thymeleaf, devtools
+   implementation 'org.springframework.boot:spring-boot-starter-web'
+   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+   compileOnly 'org.projectlombok:lombok'
+   annotationProcessor 'org.projectlombok:lombok'
+   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+
+.java 파일들은 src/main/java - com.example에 추가
+
+.html 파일들은 src/main.resources - templates에 추가
+
+이미지 파일 2개는 src/main.resources - static - image폴더 생성하고 그 안에 추가

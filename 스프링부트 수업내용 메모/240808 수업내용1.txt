@@ -1,0 +1,66 @@
+리포지토리
+ : 테이블의 데이터를 저장,조회,수정,삭제(CRUD) 등을 할 수 있도록
+  도와주는 인터페이스
+----------------------------------
+insert
+save();
+
+findAll();
+----------------------------------
+JpaRepository
+ : JPA가 제공하는 인터페이스 중 하나
+CRUD 작업을 처리하는 메서드들을 이미 내장하고 있음
+(Create,Read(select),Update,Delete)
+
+
+의존성 주입(Dependency Injection)
+- 스프링이 객체를 대신 생성하여 주입하는 기법
+
+-----------------------------------------
+H2-console에서 컬럼 삭제하는 방법
+alter table question drop column 컬럼명;
+
+SQL의 연산자
+- 리포지토리의 메서드 사용 예
+
+And
+- findBySubjectAndContent(String subject, String content)
+- Subject(열,컬럼) Content(열,컬럼)과 일치하는 데이터 조회
+
+Or
+- findBySubjectOrContent(String subject, String content)
+- Subject열 또는 Content열과 일치하는 데이터를 조회
+
+Between
+- findByCreateDateBetween(LocalDateTime fromDate, LocalDateTime toDate)
+- createDate 열의 데이터 중 정해진 범위 내에 있는 데이터를 조회
+
+GreaterThanEqual
+- findByGreaterThanEqual(Integer id)
+- id열에서 조건보다 크거나 같은 데이터를 조회
+
+LessThen
+- findByLessThan(Integer id)
+- id열에서 조건보다 작거나 같은 데이터를 조회
+
+Like
+- findBySubjectLike(String subject)
+- subject열에서 문자열 'subject'와 같은 문자열을 포함한 데이터를 조회
+
+In
+- findBySubjectIn(String[] subjects)
+- subject 열의 데이터가 주어진 배열에 포함되는 데이터만 조회
+
+Order by
+- findBySubjectOrderByCreateDateAsc(String subject)
+- subject의 열 중 조건에 일치하는 데이터를 조회해서 결과를 리턴할 때
+  CreateDate열을 오름차순으로 정렬하여 리턴
+
+MVC 패턴
+M - Model
+	: JPA로 사용
+V - View
+	: Thymeleaf
+C - Controller
+	: URL 요청을 분석한다.
+

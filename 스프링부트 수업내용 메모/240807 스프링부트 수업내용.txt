@@ -1,0 +1,232 @@
+처음 프로젝트 생성하기
+오른쪽버튼 - spring starter project 클릭
+name - sbt 입력
+package com.example까지만 입력
+
+
+src/main/resources
+application.properties에서 server.port=8888 입력하고 저장
+
+src/main/java
+com.example 오른쪽클릭 - class 클릭
+HelloController 클래스파일 생성
+---------------------------------------------------------------------------------------------------------------
+package com.example;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HelloController {
+	
+	@GetMapping("/hello")  //   http://localhost:8080/hello
+	@ResponseBody //메서드가 반환하는 값을 HTTP 응답의 본문으로 직접 반환하도록 지정
+	public String hello() {
+		return "Hello boot"; //내용바꾸고 저장하면 내용이 바뀜
+	}
+}
+
+---------------------------------------------------------------------------------------------------------------
+
+lombok 다운로드
+https://projectlombok.org/download
+specify location 누르고 스프링부트 초록색아이콘 있는 폴더 경로까지 가서 선택누르기
+specify location 오른편에 있는 install/update 누르고 설치
+다 되면 Quit installer 누르고 종료
+
+스프링부트 프로그램 들어있는 폴더에 lombok 잘 설치돼있는지 확인하기
+
+
+위와 같은 방법으로 HelloLombok 클래스 파일 생성
+---------------------------------------------------------------------------------------------------------------
+package com.example;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+public class HelloLombok {
+	private String hello;
+	private String lombok;
+	
+	public static void main(String[] args) {
+		HelloLombok hl = new HelloLombok();
+		hl.setHello("헬로");
+		hl.setLombok("롬복");
+		
+		System.out.println(hl.getHello()+", "+hl.getLombok());
+	}
+	
+}
+
+---------------------------------------------------------------------------------------------------------------
+
+build.gradle에서
+dependencies {
+	developmentOnly 'org.springframework.boot:spring-boot-devtools' //저장만 누르면 서버 자동으로 재실행 해주는 기능
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+}
+추가하고 gradle파일 오른쪽버튼 클릭하고 그래들 - 리프레쉬그래들프로젝트 클릭하기
+
+**********왼쪽 하단에 Boot Dashboard 안 뜰 때**********
+상단바 Source 바로 밑에 있는 초록색 전원 버튼 클릭해주면 뜸
+
+
+----------------------------------------------------------------------------------------------------------------
+
+H2 데이터베이스 설치하기
+www.h2database.com에서 Downloads - Windows Installer 다운로드
+다운로드파일 잘라내기 한 후 저장경로 springboot-study폴더로 옮기기
+C:\Program Files (x86) - H2폴더 클릭 - bin - h2w배치파일 클릭 - JDBC URL: jdbc:h2:~/local 로 수정하고 나머지는 그대로
+둔 후 연결 
+
+C드라이브 - 사용자 - local.mv 받아졌는지 확인하기
+
+build.gradle파일로 돌아와서 dependencies에
+	runtimeOnly 'com.h2database:h2' 추가하고 저장버튼
+
+application.properties에 추가해주기
+
+#DATABASE
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.datasource.url=jdbc:h2:tcp://localhost/~/local
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+-------------------------------------------------------------------------------------------------------------------
+build.gradle 파일
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+}
+-------------------------------------------------------------------------------------------------------------------
+package com.example;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller //클래스가 컨트롤러 역할이라는 것을 표시
+public class MainController { //  http://localhost:8888/sbt
+	@GetMapping("/sbt")
+	@ResponseBody //메서드의 결과를 브라우저에서 확인 가능
+	public String index() {
+		return "sbt에 오신 것을 환영합니다.";
+	}
+}
+-------------------------------------------------------------------------------------------------------------------
+application.properties
+
+spring.application.name=sbt
+
+#PORT
+server.port=8888
+
+# DATABASE
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.datasource.url=jdbc:h2:tcp://localhost/~/local
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+#JPA
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+http://localhost:8888//h2-console
+
+-------------------------------------------------------------------------------------------------------------------
+
+Question.java 클래스
+
+package com.example;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@Entity //스프링부트가 Question 클래스를 엔티티로 인식한다.
+public class Question {
+	
+	@Id //어노테이션이 붙어있는 변수를 기본키(primary key)로 지정한다.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//데이터를 저장할 때 해당 변수에 값을 일일이 넣지 않아도 1씩 자동 증가해서 저장된다.
+	private Integer id;
+	
+	@Column(length=200) //length : 열(컬럼)의 길이를 지정
+	private String subject;
+	
+	@Column(columnDefinition="TEXT") //columnDefinition : 열(컬럼)의 유형,성격 정의할 때 사용
+	private String content;
+	
+	private LocalDateTime createDate;
+	
+	@OneToMany(mappedBy="question",cascade = CascadeType.REMOVE)
+	private List<Answer> answerList; //답변리스트
+}
+
+-------------------------------------------------------------------------------------------------------------------
+
+package com.example;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Answer {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(columnDefinition = "TEXT")
+	private String content;
+	
+	private LocalDateTime createDate;
+	
+	
+	//질문 엔티티를 참조하기 위해 question 속성(변수)를 추가함
+	@ManyToOne
+	private Question question; //변수 이름은 마음대로	 
+}
+
+/*
+답변 : 질문 = N : 1  -> @ManyToOne
+질문 : 답변 = 1 : N  -> @OneToMany
+*/
+-------------------------------------------------------------------------------------------------------------------
+
+
