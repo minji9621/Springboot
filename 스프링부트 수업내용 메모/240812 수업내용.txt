@@ -1,0 +1,33 @@
+오른쪽 버튼 - new - spring starter project - Name을 param으로 입력하고 다음
+ - spring web,lombok 체크 후 피니쉬
+
+param프로젝트에 있는 build.gradle에 아래 내용 추가하고 refresh gradle project 해주기
+
+dependencies { //개발도구, 롬복, 타임리프
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframewokr.boot:spring-boot-starter-thymeleaf'
+ }
+
+application.properties에 아래 내용 추가
+---------------------------------------------------------
+# server
+server.port=8888
+
+# log level
+logging.level.root=info
+
+# file upload
+spring.servlet.multipart.max-file-size=100MB
+spring.servlet.multipart.max-request-size=100MB
+----------------------------------------------------------
+
+src/main/java - com.example 오른쪽버튼 누르고 ParamController 클래스 생성
+
+src/main/resources - templates 안에 html파일들 생성하기
+
+ex09할 때 C드라이브에 upload 폴더 하나 만들기
