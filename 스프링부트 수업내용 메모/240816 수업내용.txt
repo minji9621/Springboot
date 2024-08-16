@@ -1,0 +1,41 @@
+build.gradle에 추가
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	testImplementation 'org.junit.jupiter:junit-jupiter'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+}
+
+
+
+CSRF(Cross Site Request Forgery)
+: 웹 보안 공격 중 하나
+조작된 정보로 웹 사이트가 실행되도록 속이는 공격 기술
+
+CSRF 토큰 발행
+토큰 - 어떠한 요청을 식별하고 검증하는데 사용하는 특수한 문자열,값을 의미함
+
+세션 - 사용자의 상태를 유지하고 관리하는데 사용하는 기능
+
+X-frame-Options 헤더는 브라우저에서 렌더링을 허용,금지 여부를 결정하는 응답헤더
+
+사용가능한 옵션
+-------------------------------------------------
+DENY : iframe 비허용(불가)
+SAMEORIGIN : 동일 도메인 내에서 접근 가능
+ALLOW-FROM {도메인} : 특정 도메인 접근 가능
+
+
+
+  
